@@ -17,8 +17,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\LoggerLogic\LoggerLogic.csproj" />
-  </ItemGroup>
-
 </Project>
