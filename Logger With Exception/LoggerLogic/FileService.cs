@@ -6,28 +6,15 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Text.Json.Serialization;
 using System.Runtime.CompilerServices;
-using System.Text.Json;
-using Newtonsoft.Json;
-using JsonSerializer = Newtonsoft.Json.JsonSerializer;
 
 namespace LoggerLogic
 {
     public static class FileService
     {
-        public static async void CreateFiles(DateTime time, string message)
+        public static void CreateFiles(DateTime time, string message)
         {
-            string? configJson;
-            if (!File.Exists("config.json"))
-            {
-                File.WriteAllText("config.json", JsonConvert.SerializeObject(Directory.GetCurrentDirectory() + "\\Logs\\"));
-                configJson = File.ReadAllText("config.json");
-            }
-            else
-            {
-                configJson = File.ReadAllText("config.json");
-            }
-
-            var path = (string)JsonConvert.DeserializeObject(configJson);
+            var count = 7;
+            var path = Directory.GetCurrentDirectory() + @"//logs//";
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
@@ -39,7 +26,7 @@ namespace LoggerLogic
                 sw.WriteLine(message);
             }
 
-            CheckCountFiles(path, 3);
+            CheckCountFiles(path, count);
         }
 
         public static void CheckCountFiles(string path, int countFiles)
