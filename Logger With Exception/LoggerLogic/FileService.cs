@@ -66,17 +66,5 @@ namespace LoggerLogic
                 }
             }
         }
-
-        // GetCurrentDirectory(): получает путь к текущей папке
-        // string[] GetFiles(path): получает список файлов в каталоге path
-        // public DirectoryInfo (string path);
-        // Create(): создает каталог
-        // FileInfo[] GetFiles(): получает список файлов в папке в виде массива FileInfo
-        // bool Exists: определяет, существует ли каталог
-
-        // string[] files = Directory.GetFiles(dirName, "*.exe");
-        // класс DirectoryInfo
-        // var directory = new DirectoryInfo(dirName);
-        // FileInfo[] files = directory.GetFiles("*.exe");
     }
 }
