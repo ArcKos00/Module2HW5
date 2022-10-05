@@ -16,7 +16,22 @@ namespace LoggerLogic
     {
         public static async void CreateFiles(DateTime time, string message)
         {
-            var path = ConfigService.Service();
+            string? configJson;
+            if (!File.Exists("config.json"))
+            {
+                File.WriteAllText("config.json", JsonConvert.SerializeObject(Directory.GetCurrentDirectory() + "\\Logs\\"));
+                configJson = File.ReadAllText("config.json");
+            }
+            else
+            {
+                configJson = File.ReadAllText("config.json");
+            }
+
+            var path = (string)JsonConvert.DeserializeObject(configJson);
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
 
             var fileName = time.ToString("hh.mm.ss") + " " + time.ToString("dd.MM.yyyy") + ".txt";
             using (var sw = new StreamWriter(path + fileName, true))
@@ -51,5 +66,17 @@ namespace LoggerLogic
                 }
             }
         }
+
+        // GetCurrentDirectory(): получает путь к текущей папке
+        // string[] GetFiles(path): получает список файлов в каталоге path
+        // public DirectoryInfo (string path);
+        // Create(): создает каталог
+        // FileInfo[] GetFiles(): получает список файлов в папке в виде массива FileInfo
+        // bool Exists: определяет, существует ли каталог
+
+        // string[] files = Directory.GetFiles(dirName, "*.exe");
+        // класс DirectoryInfo
+        // var directory = new DirectoryInfo(dirName);
+        // FileInfo[] files = directory.GetFiles("*.exe");
     }
 }
